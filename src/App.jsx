@@ -11,16 +11,13 @@ const convert = (data) => {
 
   return rows.map((row) => {
     const hanziArr = row.split("").map(resSpace);
-    const pinyinArr = hanziArr.map((item) => pinyin(item));
 
-    return {
-      hanziArr,
-      pinyinArr
-    }
+    return hanziArr.map((item) => ({ hanzi: item, pinyin: pinyin(item) }));
   });
 };
 
 function App() {
+  const [isPinyinVisible, setPinyinVisibility] = createSignal(true);
   const [text, setText] = createSignal("由");
 
   return (
@@ -32,23 +29,26 @@ function App() {
           setText(e.currentTarget.value);
         }}
       ></textarea>
+      <div>
+        <button onClick={() => setPinyinVisibility(!isPinyinVisible())}>
+          {isPinyinVisible() ? 'Hide Pinyin' : 'Show Pinyin'}
+        </button>
+      </div>
 
       <div>
         {convert(text()).map((row) => (
-          <table class="row-table" border="0" cellspacing="1" cellpadding="1">
-            <tbody>
-            <tr>
-            {row.pinyinArr.map(itm => (
-              <td><span class="pinyin">{itm}</span></td>
+          <div class="row">
+            {row.map((item) => (
+              <ruby>
+                <span class="hanzi">{item.hanzi}</span>
+                {isPinyinVisible() ? (
+                  <rt>
+                    <span class="pinyin">{item.pinyin}</span>
+                  </rt>
+                ) : null}
+              </ruby>
             ))}
-            </tr>
-            <tr>
-            {row.hanziArr.map(itm => (
-              <td><span class="hanzi">{itm}</span></td>
-            ))}
-            </tr>
-            </tbody>
-          </table>
+          </div>
         ))}
       </div>
     </>
