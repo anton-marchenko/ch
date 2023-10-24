@@ -1,27 +1,54 @@
-import { createSignal } from 'solid-js'
-import solidLogo from './assets/solid.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { createSignal } from "solid-js";
+import { pinyin } from "./convert.utils";
+import "./App.css";
+
+// 切的图标集 由
+
+const convert = (data) => {
+  const rows = data.split("\n");
+
+  return rows.map((row) => {
+    const arr = row.split("");
+
+    return arr.map((item) => ({ pinyin: pinyin(item), hanzi: item }));
+  });
+};
+
+const resSpace = (char) => (char === " " ? "&nbsp;&nbsp;" : char);
+
+function Char(props) {
+  return (
+    <div class="ch-box">
+      <span class="pinyin">{props.pinyin}</span>
+      <span class="ch">{props.hanzi}</span>
+    </div>
+  );
+}
 
 function App() {
-  const [count, setCount] = createSignal(0)
+  const [text, setText] = createSignal("由");
 
   return (
     <>
-      <h1>Ant</h1>
-      <div class="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count()}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+      <textarea
+        value={text()}
+        onInput={(e) => {
+          console.log(e.currentTarget.value);
+          setText(e.currentTarget.value);
+        }}
+      ></textarea>
+
+      <div>
+        {convert(text()).map((row) => (
+          <div>
+            {row.map((item) => (
+              <Char pinyin={item.pinyin} hanzi={item.hanzi}></Char>
+            ))}
+          </div>
+        ))}
       </div>
-      <p class="read-the-docs">
-        Click on the Vite and Solid logos to learn more
-      </p>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
