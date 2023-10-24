@@ -4,26 +4,21 @@ import "./App.css";
 
 // 切的图标集 由
 
+const resSpace = (char) => (char === " " ? "   " : char);
+
 const convert = (data) => {
   const rows = data.split("\n");
 
   return rows.map((row) => {
-    const arr = row.split("");
+    const hanziArr = row.split("");
+    const pinyinArr = hanziArr.map((item) => pinyin(item));
 
-    return arr.map((item) => ({ pinyin: pinyin(item), hanzi: item }));
+    return {
+      hanziArr,
+      pinyinArr
+    }
   });
 };
-
-const resSpace = (char) => (char === " " ? "&nbsp;&nbsp;" : char);
-
-function Char(props) {
-  return (
-    <div class="ch-box">
-      <span class="pinyin">{props.pinyin}</span>
-      <span class="ch">{props.hanzi}</span>
-    </div>
-  );
-}
 
 function App() {
   const [text, setText] = createSignal("由");
@@ -40,11 +35,20 @@ function App() {
 
       <div>
         {convert(text()).map((row) => (
-          <div>
-            {row.map((item) => (
-              <Char pinyin={item.pinyin} hanzi={item.hanzi}></Char>
+          <table class="row-table" border="0" cellspacing="1" cellpadding="1">
+            <tbody>
+            <tr>
+            {row.pinyinArr.map(itm => (
+              <td><span class="pinyin">{itm}</span></td>
             ))}
-          </div>
+            </tr>
+            <tr>
+            {row.hanziArr.map(itm => (
+              <td><span class="hanzi">{itm}</span></td>
+            ))}
+            </tr>
+            </tbody>
+          </table>
         ))}
       </div>
     </>
