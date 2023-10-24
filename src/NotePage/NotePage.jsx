@@ -17,10 +17,10 @@ const convert = (data) => {
 };
 
 function NotePage (props) {
-    const noteId = props.noteId;
     const [isPinyinVisible, setPinyinVisibility] = createSignal(true);
-    const [text, setText] = createSignal("由");
-  
+    const text = props.noteText;
+    const setText = props.setNoteText;
+
     return (
       <>
       <div class="editor">
