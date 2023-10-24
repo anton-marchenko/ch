@@ -5,12 +5,14 @@
     width: 100%;
     box-sizing: border-box;
     padding: 10px;
+    padding-left: 20px;
     background-color: #fff;
     border-bottom: 1px solid #888;
   }
   
   textarea {
-    width: 90%;
+    width: 100%;
+    box-sizing: border-box;
     min-height: 150px;
     font-size: 20px;
   }
