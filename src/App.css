@@ -1,12 +1,28 @@
 #root {
+  position: relative;
   margin: 10px;
   box-sizing: border-box;
+}
+
+.editor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px;
+  background-color: #fff;
+  border-bottom: 1px solid #888;
 }
 
 textarea {
   width: 90%;
   min-height: 150px;
   font-size: 20px;
+}
+
+.reader {
+  margin-top: 220px;
 }
 
 .pinyin {

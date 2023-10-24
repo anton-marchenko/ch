@@ -22,6 +22,7 @@ function App() {
 
   return (
     <>
+    <div class="editor">
       <textarea
         value={text()}
         onInput={(e) => {
@@ -34,8 +35,9 @@ function App() {
           {isPinyinVisible() ? 'Hide Pinyin' : 'Show Pinyin'}
         </button>
       </div>
+    </div>
 
-      <div>
+      <div class="reader">
         {convert(text()).map((row) => (
           <div class="row">
             {row.map((item) => (
