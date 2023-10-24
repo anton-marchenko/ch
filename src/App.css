@@ -11,6 +11,7 @@ textarea {
 .pinyin {
   color: #888;
   font-size: 16px;
+  margin-right: 2px;
 }
 
 .hanzi {

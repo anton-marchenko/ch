@@ -4,13 +4,13 @@ import "./App.css";
 
 // 切的图标集 由
 
-const resSpace = (char) => (char === " " ? "   " : char);
+const resSpace = (char) => (char === " " ? " " : char);
 
 const convert = (data) => {
   const rows = data.split("\n");
 
   return rows.map((row) => {
-    const hanziArr = row.split("");
+    const hanziArr = row.split("").map(resSpace);
     const pinyinArr = hanziArr.map((item) => pinyin(item));
 
     return {
