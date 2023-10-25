@@ -16,13 +16,13 @@ const convert = (data) => {
   });
 };
 
-function NotePage (props) {
-    const [isPinyinVisible, setPinyinVisibility] = createSignal(true);
-    const text = props.noteText;
-    const setText = props.setNoteText;
+function NotePage(props) {
+  const [isPinyinVisible, setPinyinVisibility] = createSignal(true);
+  const text = props.noteText;
+  const setText = props.setNoteText;
 
-    return (
-      <>
+  return (
+    <>
       <div class="editor">
         <textarea
           value={text()}
@@ -33,15 +33,18 @@ function NotePage (props) {
         ></textarea>
         <div>
           <button onClick={() => setPinyinVisibility(!isPinyinVisible())}>
-            {isPinyinVisible() ? 'Hide Pinyin' : 'Show Pinyin'}
+            {isPinyinVisible() ? "Hide Pinyin" : "Show Pinyin"}
           </button>
         </div>
       </div>
-  
-        <div class="reader">
-          {convert(text()).map((row) => (
-            <div class="row">
-              {row.map((item) => (
+
+      <div class="reader">
+        {convert(text()).map((row) => (
+          <div class="row">
+            {row.map((item) =>
+              item.hanzi === item.pinyin ? (
+                <span class="hanzi">{item.hanzi}</span>
+              ) : (
                 <ruby>
                   <span class="hanzi">{item.hanzi}</span>
                   {isPinyinVisible() ? (
@@ -50,12 +53,13 @@ function NotePage (props) {
                     </rt>
                   ) : null}
                 </ruby>
-              ))}
-            </div>
-          ))}
-        </div>
-      </>
-    );
+              )
+            )}
+          </div>
+        ))}
+      </div>
+    </>
+  );
 }
 
 export default NotePage;
