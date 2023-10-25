@@ -24,7 +24,6 @@ function App() {
   const [notes, setNotes] = createSignal(getNotesFromStorage());
   const [currNoteIndex, setCurrNoteIndex] = createSignal(-1);
   const currNoteText = () => {
-    console.log(notes(), currNoteIndex())
     return notes().find((_, index) => currNoteIndex() === index);
   };
 
@@ -38,7 +37,7 @@ function App() {
   };
   const removeNote1 = (index) => {
     removeNote(index);
-
+    setCurrNoteIndex(-1);
     setNotes(getNotesFromStorage());
   };
   const updateNote1 = (index, text) => {
