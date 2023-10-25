@@ -1,28 +1,32 @@
 import "./Menu.css";
 
-function Menu({ notes, setNoteText, setMenuOpen, createNewNote }) {
+function Menu({ notes, setNoteIndex, setMenuOpen, createNewNote, removeNote }) {
   return (
     <div class="menu">
       <div>MENU</div>
       <div
         class="menu-item"
         onClick={() => {
-          createNewNote("444");
+          createNewNote("New note");
           setMenuOpen(false);
         }}
       >
         <button>Create new note</button>
       </div>
-      {notes.map((itemText, index) => (
-        <div
-          class="menu-item"
-          onClick={() => {
-            setNoteText(itemText);
-            setMenuOpen(false);
-          }}
-        >
-          <span class="menu-text">{itemText}</span>
-          <button class="delete-button">🗙</button>
+      {notes().map((itemText, index) => (
+        <div class="menu-item">
+          <span
+            class="menu-text"
+            onClick={() => {
+              setNoteIndex(index);
+              setMenuOpen(false);
+            }}
+          >
+            {itemText}
+          </span>
+          <button class="delete-button" onClick={() => removeNote(index)}>
+            🗙
+          </button>
         </div>
       ))}
     </div>
