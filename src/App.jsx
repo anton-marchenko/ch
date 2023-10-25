@@ -24,13 +24,14 @@ function App() {
   const [notes, setNotes] = createSignal(getNotesFromStorage());
   const [currNoteIndex, setCurrNoteIndex] = createSignal(-1);
   const currNoteText = () => {
+    console.log(notes(), currNoteIndex())
     return notes().find((_, index) => currNoteIndex() === index);
   };
 
   const createNewNote = (text) => {
-    setCurrNoteIndex(0);
     addNoteToStorage(text);
     setNotes(getNotesFromStorage());
+    setCurrNoteIndex(0);
   };
   const setNoteIndex = (index) => {
     setCurrNoteIndex(index);

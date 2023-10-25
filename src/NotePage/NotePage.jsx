@@ -16,19 +16,17 @@ const convert = (data) => {
   });
 };
 
-function NotePage(props) {
+function NotePage({noteText, setNoteText}) {
   const [isPinyinVisible, setPinyinVisibility] = createSignal(true);
-  const text = props.noteText;
-  const setText = props.setNoteText;
+  const convertedText = () => convert(noteText());
 
   return (
     <>
       <div class="editor">
         <textarea
-          value={text()}
+          value={noteText()}
           onInput={(e) => {
-            console.log(e.currentTarget.value);
-            setText(e.currentTarget.value);
+            setNoteText(e.currentTarget.value);
           }}
         ></textarea>
         <div>
@@ -39,7 +37,7 @@ function NotePage(props) {
       </div>
 
       <div class="reader">
-        {convert(text()).map((row) => (
+        {convertedText().map((row) => (
           <div class="row">
             {row.map((item) =>
               item.hanzi === item.pinyin ? (
