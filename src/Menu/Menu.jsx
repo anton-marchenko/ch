@@ -25,7 +25,7 @@ function Menu({ notes, setNoteIndex, setMenuOpen, createNewNote, removeNote }) {
             {itemText}
           </span>
           <button class="delete-button" onClick={() => removeNote(index)}>
-            🗙
+            X
           </button>
         </div>
       ))}

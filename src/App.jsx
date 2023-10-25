@@ -10,14 +10,8 @@ import {
   updateNote,
 } from "./storage.utils";
 
-// const customerData = [
-//   {
-//     text: "切的图标集 由",
-//   },
-//   {
-//     text: "切的图\n标集 由切的\n图标集 由切的图\n标集 由",
-//   },
-// ];
+// 切的图标集 由
+// 切的图\n标集 由切的\n图标集 由切的图\n标集 由
 
 function App() {
   const [menuToggle, setMenuOpen] = createSignal(false);
@@ -48,9 +42,9 @@ function App() {
 
   return (
     <>
-      <div class="menu-button" onClick={() => setMenuOpen(!menuToggle())}>
-        {"⯇"}
-      </div>
+      <button class="menu-button" onClick={() => setMenuOpen(!menuToggle())}>
+        {"M"}
+      </button>
       {menuToggle() ? (
         <Menu
           notes={notes}
